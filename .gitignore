@@ -1,0 +1,4 @@
+# auto gen/managed files
+mod-list.json
+# per-person dev env settings file
+.vscode/settings.json

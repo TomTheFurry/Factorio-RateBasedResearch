@@ -1,6 +1,0 @@
-Version: 0.1.0
-  Changes:
-    - TODO
-Version: 0.1.1
-  Changes:
-    - Updated to factorio 2.0

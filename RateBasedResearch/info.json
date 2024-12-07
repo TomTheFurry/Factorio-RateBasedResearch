@@ -1,0 +1,8 @@
+{
+  "name": "RateBasedResearch",
+  "version": "0.1.1",
+  "title": "RateBasedResearch",
+  "author": "TomTheFurry",
+  "description": "Research now actively decays! So unless you are producing the research at a rate that is needed for a technology, you better be scaling up instead of AFK!",
+  "factorio_version": "2.0"
+}
