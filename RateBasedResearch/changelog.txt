@@ -11,3 +11,12 @@ Version: 0.1.2
   Changes:
     - Move to proper dev environment
     - Fix some loc string bugs
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+  Changes:
+    - Change research rate speed to be a cutoff instead of having falloffs
+    - Refactor code
+    - Reconfigure available settings
+    - Add support for edge-case researches
+    - Add (partial) support for infinite researches
+    - Update desciption strings to be more informative and user friendly

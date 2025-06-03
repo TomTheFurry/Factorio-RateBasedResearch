@@ -1,12 +1,6 @@
 require("libs.utils")
 
 
-local timeFactor = settings.startup["science-time-factor"].value
-local rateRatioBase = settings.startup["science-rate-ratio-base"].value
-local rateRatioExponent = settings.startup["science-rate-ratio-exponent"].value
-
-printSetting = {skip=defines.print_skip.never, sound=defines.print_sound.never, game_state=false}
-
 local researchStartFunc = function(event)
     local force = event.research.force
     local researchSpeedData = {research = event.research, prog = event.research.saved_progress}
@@ -27,31 +21,25 @@ script.on_event(defines.events.on_tick, function(event)
 			local r = force.current_research
 			if r==nil then goto continue end
 			if r.researched then goto continue end
-			if r.prototype.research_unit_count==nil then goto continue end
-            local force = r.force
+            local data
+            if (r.prototype.research_unit_count_formula~=nil) then
+                data = RuntimeInfDataMake(r)
+            else
+                if r.prototype.research_unit_count==nil then goto continue end
+                data = RuntimeMake(r)
+            end
+            if data==nil then goto continue end
             local progress = force.research_progress
-            local shouldWork = storage.RBRData~=nil and storage.RBRData[force.index]~=nil
             if storage.RBRData~=nil
                 and storage.RBRData[force.index]~=nil
                 and storage.RBRData[force.index].research.prototype.name==r.prototype.name
             then
                 local rsdOld = storage.RBRData[force.index]
-                
-                local cost = r.prototype.research_unit_count / timeFactor -- get back original cost
-                
-                local sciRequired = math.ceil(10 * rateRatioBase * cost ^ rateRatioExponent) / 10
-                local progRequired = sciRequired/r.prototype.research_unit_count
-                progRequired = RoundAtPointOffset(progRequired, 3)
-                local progChange = math.max(0, progress - rsdOld.prog) * 60
-                progChange = RoundAtPointOffset(progChange, 3)
-                local sciChange = progChange*r.prototype.research_unit_count
-                
-                --game.print("Next!", printSetting)
-                --game.print("sciRequired "..tostring(sciRequired), printSetting)
-                --game.print("sciChange "..tostring(sciChange), printSetting)
-                --game.print("progRequired "..tostring(progRequired), printSetting)
-                --game.print("progChange "..tostring(progChange), printSetting)
-                if progChange >= progRequired then
+                local progChange = (progress - rsdOld.prog) * 60 -- to sec
+                local progRequired = data.sciPerSec / data.sciCost -- how much progress is needed per sec to complete the research
+                game.print("Progress change: "..tostring(progChange), printSetting)
+                game.print("Progress required: "..tostring(progRequired), printSetting)
+                if progChange + 0.00001 >= progRequired then
                     progress = rsdOld.prog + (progChange / 60)
                 else
                     progress = rsdOld.prog - ((progRequired - progChange) / 60)
