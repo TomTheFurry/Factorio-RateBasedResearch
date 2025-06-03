@@ -96,7 +96,7 @@ function RuntimeInfDataMake(tech)
         sciCost = cost,
         sciPerSec = RoundAtPoint(rateRatioBase * (cost ^ rateRatioExponent), 0.1)
     } -- any other field is invalid (and unused)
-    game.print("Inf cost: " .. tostring(obj.sciCost)..", sciPerSec: " .. tostring(obj.sciPerSec), printSetting)
+    --game.print("Inf cost: " .. tostring(obj.sciCost)..", sciPerSec: " .. tostring(obj.sciPerSec), printSetting)
     return obj
 end
 

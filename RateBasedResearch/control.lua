@@ -37,8 +37,8 @@ script.on_event(defines.events.on_tick, function(event)
                 local rsdOld = storage.RBRData[force.index]
                 local progChange = (progress - rsdOld.prog) * 60 -- to sec
                 local progRequired = data.sciPerSec / data.sciCost -- how much progress is needed per sec to complete the research
-                game.print("Progress change: "..tostring(progChange), printSetting)
-                game.print("Progress required: "..tostring(progRequired), printSetting)
+                --game.print("Progress change: "..tostring(progChange), printSetting)
+                --game.print("Progress required: "..tostring(progRequired), printSetting)
                 if progChange + 0.00001 >= progRequired then
                     progress = rsdOld.prog + (progChange / 60)
                 else

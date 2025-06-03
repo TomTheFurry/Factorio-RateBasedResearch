@@ -1,6 +1,6 @@
 {
   "name": "RateBasedResearch",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "title": "RateBasedResearch",
   "author": "TomTheFurry",
   "description": "Research now actively decays! So unless you are producing the research at a rate that is needed for a technology, you better be scaling up instead of AFK!",

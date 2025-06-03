@@ -4,7 +4,7 @@ local technologies=data.raw.technology
 
 for _,technology in pairs(technologies) do
 	if (technology.unit == nil and technology.research_trigger == nil) then
-		__DebugAdapter.print("skipping tech " .. technology.name .. " with no unit data")
+		--__DebugAdapter.print("skipping tech " .. technology.name .. " with no unit data")
 		goto continue
 	end
 	if (technology.unit == nil and technology.research_trigger ~= nil) then
@@ -16,11 +16,11 @@ for _,technology in pairs(technologies) do
 		if (num ~= nil) then
 			technology.unit.count = num
 			technology.unit.count_formula = nil -- remove formula
-			__DebugAdapter.print("Converted tech " .. technology.name .. " with formula to constant value: " .. num)
+			--__DebugAdapter.print("Converted tech " .. technology.name .. " with formula to constant value: " .. num)
 		else
 			-- we can't resolve any numbers yet. So instead, mutate the formula
 			ImplInfDataModification(technology)
-			__DebugAdapter.print("Mutated tech " .. technology.name .. " with formula: " .. technology.unit.count_formula)
+			--__DebugAdapter.print("Mutated tech " .. technology.name .. " with formula: " .. technology.unit.count_formula)
 			AddPrePostfix(technology, "[font=count-font](TODO: Unable to show numbers for formula-cost-based research)[/font]\n", "")
 			goto continue
 		end
